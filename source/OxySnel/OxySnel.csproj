@@ -17,7 +17,7 @@
     <None Remove="PlotModelView.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="../external/oxyplot-avalonia/Source/OxyPlot.Avalonia/OxyPlot.Avalonia.csproj" />
+    <ProjectReference Include="../../external/oxyplot-avalonia/Source/OxyPlot.Avalonia/OxyPlot.Avalonia.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.9.6" />

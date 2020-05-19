@@ -1,0 +1,11 @@
+# builds everything .NET Core
+image: microsoft/dotnet:sdk
+
+pipelines:
+  default:
+    - step:
+        caches:
+          - dotnetcore
+        script:
+          - export OxySnel=source/OxySnel.sln
+          - dotnet build $NETSTATE --configuration Release
