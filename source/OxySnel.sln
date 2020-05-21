@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29911.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OxySnel", "OxySnel\OxySnel.csproj", "{89E49EF5-E73E-4014-9CF3-BDC1005588DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OxySnel", "OxySnel\OxySnel.csproj", "{89E49EF5-E73E-4014-9CF3-BDC1005588DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnelTest", "SnelTest\SnelTest.csproj", "{CE2B72E2-74C2-48CE-99F7-EA4F0F732FC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SnelTest", "SnelTest\SnelTest.csproj", "{CE2B72E2-74C2-48CE-99F7-EA4F0F732FC4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OxyPlot.Avalonia", "..\external\oxyplot-avalonia\Source\OxyPlot.Avalonia\OxyPlot.Avalonia.csproj", "{290E9B7B-E1E5-4B3E-B3E8-6F7648ED44F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{CE2B72E2-74C2-48CE-99F7-EA4F0F732FC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE2B72E2-74C2-48CE-99F7-EA4F0F732FC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE2B72E2-74C2-48CE-99F7-EA4F0F732FC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{290E9B7B-E1E5-4B3E-B3E8-6F7648ED44F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{290E9B7B-E1E5-4B3E-B3E8-6F7648ED44F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{290E9B7B-E1E5-4B3E-B3E8-6F7648ED44F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{290E9B7B-E1E5-4B3E-B3E8-6F7648ED44F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

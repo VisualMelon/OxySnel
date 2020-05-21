@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 using System.Threading;
+using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -14,24 +15,21 @@ namespace OxySnel
 {
     public class Snel
     {
+        private const string DefaultWindowTitle = "OxyPlot";
+
         private static readonly object DispatcherLock = new object();
         private static CancellationTokenSource AppCancellationToken = null;
 
-        public static void Show(Plot plot)
+        public static Task Show(Plot plot, string windowTitle = DefaultWindowTitle)
         {
-            Invoke(() =>
-            {
-                var w = new MainWindow();
-                w.Context.PlotModel = plot.PlotModel;
-                w.Show();
-            });
+            return Show(plot.PlotModel, windowTitle);
         }
 
-        public static void Show(PlotModel plotModel)
+        public static Task Show(PlotModel plotModel, string windowTitle = DefaultWindowTitle)
         {
-            Invoke(() =>
+            return Invoke(() =>
             {
-                var w = new MainWindow();
+                var w = new MainWindow() { Title = windowTitle };
                 w.Context.PlotModel = plotModel;
                 w.Show();
             });
@@ -42,7 +40,7 @@ namespace OxySnel
             AppCancellationToken?.Cancel();
         }
 
-        public static void Invoke(Action action)
+        public static Task Invoke(Action action)
         {
             if (AppCancellationToken == null)
             {
@@ -55,7 +53,7 @@ namespace OxySnel
                 }
             }
 
-            Dispatcher.UIThread.InvokeAsync(action);
+            return Dispatcher.UIThread.InvokeAsync(action);
         }
 
         private static CancellationTokenSource SpinUp()

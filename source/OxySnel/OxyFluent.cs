@@ -2,6 +2,7 @@
 using OxyPlot.Axes;
 using OxyPlot.Series;
 using System;
+using System.Xml.Schema;
 
 namespace OxySnel.Fluent
 {
@@ -23,7 +24,12 @@ namespace OxySnel.Fluent
         private int NextKey = 1;
         public PlotModel PlotModel { get; }
 
-        public XAxis LinearX(string title, string key = null) => new XAxis(this, new LinearAxis() { Title = title, Key = key ?? ("X" + NextKey++), Position = AxisPosition.Bottom });
+        public XAxis LinearX(string title, string key = null)
+        {
+            var xAxis = new LinearAxis() { Title = title, Key = key ?? ("X" + NextKey++), Position = AxisPosition.Bottom };
+            this.PlotModel.Axes.Add(xAxis);
+            return new XAxis(this, xAxis);
+        }
     }
 
     public class XAxis
@@ -38,7 +44,12 @@ namespace OxySnel.Fluent
         public Plot Plot { get; }
         public Axis Axis { get; }
 
-        public YAxis LinearY(string title, string key = null) => new YAxis(this, new LinearAxis() { Title = title, Key = key ?? (Axis.Key + "Y" + NextKey++), Position = AxisPosition.Left });
+        public YAxis LinearY(string title, string key = null)
+        {
+            var yAxis = new LinearAxis() { Title = title, Key = key ?? (Axis.Key + "Y" + NextKey++), Position = AxisPosition.Left };
+            this.Plot.PlotModel.Axes.Add(yAxis);
+            return new YAxis(this, yAxis);
+        }
     }
 
     public class YAxis
@@ -70,7 +81,7 @@ namespace OxySnel.Fluent
             return ls;
         }
 
-        public LineSeries Function(string title, Func<double, double> f, double x0, double x1, double dx)
+        public FunctionSeries Function(string title, Func<double, double> f, double x0, double x1, double dx)
         {
             var fs = new FunctionSeries(f, x0, x1, dx)
             {
