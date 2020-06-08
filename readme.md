@@ -63,15 +63,18 @@ Otherwise:
 
  1. Clone the repo
 
-    `git clone https://github.com/VisualMelon/OxySnel.git`
+        git clone https://github.com/VisualMelon/OxySnel.git
 
- 2. Refresh the git submodule for oxyplot avalonia (I forget how... `git submodule update` or something; this will be replaced with a NuGet reference at some point)
+ 2. Refresh the git submodule for oxyplot avalonia (this will be replaced with a NuGet reference at some point)
+
+        git submodule init
+        git submodule update
+
  3. Build it
  
-    `dotnet build Source/OxySnel.sln`
+        dotnet build Source/OxySnel.sln
 
  4. Run an exaple?
 
-    `dotnet run --project Source/SnelTestCS/SnelTestCS.csproj`
-
-    `dotnet run --project Source/SnelTestFS/SnelTestFS.fsproj`
+        dotnet run --project Source/SnelTestCS/SnelTestCS.csproj`
+        dotnet run --project Source/SnelTestFS/SnelTestFS.fsproj`
