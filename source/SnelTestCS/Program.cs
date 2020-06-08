@@ -12,6 +12,7 @@ namespace SnelTestCS
     {
         static void Main(string[] args)
         {
+            BarGraphExample();
             var plot = new PlotModel();
             plot.PlotType = PlotType.Polar;
             plot.PlotAreaBorderThickness = new OxyThickness(0.0);
@@ -81,6 +82,36 @@ namespace SnelTestCS
 
             Console.ReadKey(true);
             Snel.Kill();
+        }
+
+        static void BarGraphExample()
+        {
+            // make a plot...
+            var plot = new PlotModel() { Title = "Time-to-plot" };
+
+            // add some series...
+            var bs = new BarSeries() { BaseValue = 0 };
+            bs.Items.Add(new BarItem(10));
+            bs.Items.Add(new BarItem(2));
+            plot.Series.Add(bs);
+
+            // add some axes
+            var categoryAxis = new CategoryAxis() { Position = AxisPosition.Left, Angle = -90 };
+            categoryAxis.Labels.Add("Without OxySnel");
+            categoryAxis.Labels.Add("With OxySnel");
+            plot.Axes.Add(categoryAxis);
+
+            var timeAxis = new LinearAxis() { Position = AxisPosition.Bottom, Title = "Time", Unit = "Money" };
+            plot.Axes.Add(timeAxis);
+
+            // show the plot
+            OxySnel.Snel.Show(plot);
+
+            // pause
+            Console.ReadKey(true);
+
+            // kill it
+            OxySnel.Snel.Kill();
         }
     }
 }
