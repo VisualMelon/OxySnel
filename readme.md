@@ -2,6 +2,8 @@
 
 Throw an interactive plot at the screen quickly from a .NET Core 2.0 console application. Might be cross-platform as it's based on [OxyPlot-Avalonia](https://github.com/oxyplot/oxyplot-avalonia); atleast that was the idea, but I'm too lazy to test it.
 
+This repo serves the purpose of being a minimal example of OxyPlot-Avalonia where I can find it in a not-completely-pointless, and to provide a simple example of OxyPlot under F#. I'll might add some more languages if I can be bothered and they actually work (VB.NET, PowerShell). It's also kind of useful if you need an interactive plot in a hurry.
+
 ## Minimal API
 
 Only three methods that matter:
