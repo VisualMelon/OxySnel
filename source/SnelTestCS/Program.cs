@@ -12,7 +12,6 @@ namespace SnelTestCS
     {
         static void Main(string[] args)
         {
-            BarGraphExample();
             var plot = new PlotModel();
             plot.PlotType = PlotType.Polar;
             plot.PlotAreaBorderThickness = new OxyThickness(0.0);
