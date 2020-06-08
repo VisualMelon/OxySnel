@@ -8,4 +8,4 @@ pipelines:
           - dotnetcore
         script:
           - export OxySnel=source/OxySnel.sln
-          - dotnet build $NETSTATE --configuration Release
+          - dotnet build OxySnel --configuration Release
