@@ -8,8 +8,6 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Logging.Serilog;
 using Avalonia.Threading;
 using OxyPlot;
-using OxySnel.Fluent;
-using SharpDX.DXGI;
 
 namespace OxySnel
 {
@@ -19,11 +17,6 @@ namespace OxySnel
 
         private static readonly object DispatcherLock = new object();
         private static CancellationTokenSource AppCancellationToken = null;
-
-        public static Task Show(Plot plot, string windowTitle = DefaultWindowTitle)
-        {
-            return Show(plot.PlotModel, windowTitle);
-        }
 
         public static Task Show(PlotModel plotModel, string windowTitle = DefaultWindowTitle)
         {
