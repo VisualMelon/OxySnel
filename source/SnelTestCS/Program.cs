@@ -12,6 +12,11 @@ namespace SnelTestCS
     {
         static void Main(string[] args)
         {
+            OxySnel.Snel.StartOnThread(ClockExample, true);
+        }
+
+        static void ClockExample()
+        {
             var plot = new PlotModel();
             plot.PlotType = PlotType.Polar;
             plot.PlotAreaBorderThickness = new OxyThickness(0.0);

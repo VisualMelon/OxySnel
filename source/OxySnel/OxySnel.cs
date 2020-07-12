@@ -18,6 +18,26 @@ namespace OxySnel
         private static readonly object DispatcherLock = new object();
         private static CancellationTokenSource AppCancellationToken = null;
 
+        public static void StartOnThread(Action started, bool callbackOffthread)
+        {
+            lock (DispatcherLock)
+            {
+                if (AppCancellationToken != null)
+                {
+                    throw new InvalidOperationException("OxySnel is already started.");
+                }
+
+                AppCancellationToken = new CancellationTokenSource();
+            }
+
+            if (callbackOffthread)
+            {
+                var t = new System.Threading.Thread(new System.Threading.ThreadStart(started));
+                started = t.Start;
+            }
+            Run(AppCancellationToken.Token, started);
+        }
+
         public static Task Show(PlotModel plotModel, string windowTitle = DefaultWindowTitle)
         {
             return Invoke(() =>
@@ -53,23 +73,24 @@ namespace OxySnel
         {
             var cts = new CancellationTokenSource();
             var sem = new ManualResetEventSlim(false);
-            void start()
-            {
-                BuildAvaloniaApp().Start(main, new string[0]);
 
-                void main(Application app, string[] args)
-                {
-                    sem.Set();
-                    app.Run(cts.Token);
-                }
-            }
-
-            var ts = new System.Threading.ThreadStart(start);
+            var ts = new System.Threading.ThreadStart(() => Run(cts.Token, () => sem.Set()));
             var t = new Thread(ts);
             t.Start();
 
             sem.Wait();
             return cts;
+        }
+
+        private static void Run(CancellationToken cancellationToken, Action started)
+        {
+            BuildAvaloniaApp().Start(main, new string[0]);
+
+            void main(Application app, string[] args)
+            {
+                started();
+                app.Run(cancellationToken);
+            }
         }
 
         // Avalonia configuration, don't remove; also used by visual designer.

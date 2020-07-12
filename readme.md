@@ -2,11 +2,15 @@
 
 Throw an interactive plot at the screen quickly from a .NET Core 2.0 console application. Might be cross-platform as it's based on [OxyPlot-Avalonia](https://github.com/oxyplot/oxyplot-avalonia); atleast that was the idea, but I'm too lazy to test it.
 
-This repo serves the purpose of being a minimal but not completely pointless example of OxyPlot-Avalonia where I can find, and to provide a simple example of OxyPlot under F#. I might add some more languages if I can be bothered and they actually work (VB.NET, PowerShell). It's also kind of useful if you need an interactive plot in a hurry.
+This repo serves the purpose of being a minimal but not completely pointless example of OxyPlot-Avalonia where I can find it, and to provide a simple example of OxyPlot under F#. I might add some more languages if I can be bothered and they actually work (VB.NET, PowerShell). It's also kind of useful if you need an interactive plot in a hurry.
 
 ## Minimal API
 
-Only three methods that matter:
+Only four methods that matter:
+
+ - `public static void OxySnel.Snel.StartOnThread(Action starter, bool callbackOffthread)`
+
+    Starts OxySnel on the current thread: this may be necessary for some systems (not sure yet....)
 
  - `public static Task OxySnel.Snel.Show(PlotModel plotModel, string windowTitle = DefaultWindowTitle)`
 
@@ -63,18 +67,19 @@ Otherwise:
 
  1. Clone the repo
 
-        git clone https://github.com/VisualMelon/OxySnel.git
+    `git clone https://github.com/VisualMelon/OxySnel.git`
 
  2. Refresh the git submodule for oxyplot avalonia (this will be replaced with a NuGet reference at some point)
 
-        git submodule init
-        git submodule update
+    `git submodule init`
+    `git submodule update`
 
  3. Build it
  
-        dotnet build Source/OxySnel.sln
+    `dotnet build Source/OxySnel.sln`
 
  4. Run an exaple?
 
-        dotnet run --project Source/SnelTestCS/SnelTestCS.csproj`
-        dotnet run --project Source/SnelTestFS/SnelTestFS.fsproj`
+    `dotnet run --project Source/SnelTestCS/SnelTestCS.csproj`
+
+    `dotnet run --project Source/SnelTestFS/SnelTestFS.fsproj`

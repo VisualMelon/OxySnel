@@ -4,8 +4,7 @@ open OxyPlot.Axes
 open OxyPlot.Series
 open OxySnel
 
-[<EntryPoint>]
-let main argv =
+let clock () =
     let plot = PlotModel()
     plot.PlotType <- PlotType.Polar
     plot.PlotAreaBorderThickness <- new OxyThickness(0.)
@@ -65,10 +64,14 @@ let main argv =
     async {
         while true do
             do! Async.Sleep 100
-            do! Snel.Invoke(System.Action(update)) |> Async.AwaitTask
+            do! Snel.Invoke(Action update) |> Async.AwaitTask
     } |> Async.StartAsTask |> ignore
 
     Console.ReadKey(true) |> ignore
     Snel.Kill()
-
+    
+[<EntryPoint>]
+let main argv =
+    OxySnel.Snel.StartOnThread(Action clock, true)
     0
+    
