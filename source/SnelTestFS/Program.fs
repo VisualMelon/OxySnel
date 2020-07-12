@@ -46,12 +46,12 @@ let clock () =
         plot.Subtitle <- now.ToLongTimeString()
 
         hour.Points.Clear()
-        hour.Points.Add(DataPoint(0., 30. * float (now.Hour % 12)))
-        hour.Points.Add(DataPoint(0.4, 30. * float (now.Hour % 12)))
+        hour.Points.Add(DataPoint(0., 30. * float (now.TimeOfDay.TotalHours % 12.0)))
+        hour.Points.Add(DataPoint(0.4, 30. * float (now.TimeOfDay.TotalHours % 12.0)))
 
         minute.Points.Clear()
-        minute.Points.Add(DataPoint(0., 6. * float now.Minute))
-        minute.Points.Add(DataPoint(0.6, 6. * float now.Minute))
+        minute.Points.Add(DataPoint(0., 6. * float (now.TimeOfDay.TotalMinutes % 60.0)))
+        minute.Points.Add(DataPoint(0.6, 6. * float (now.TimeOfDay.TotalMinutes % 60.0)))
 
         second.Points.Clear()
         second.Points.Add(DataPoint(-0.2, 6. * float now.Second))

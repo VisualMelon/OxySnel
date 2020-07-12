@@ -59,12 +59,12 @@ namespace SnelTestCS
                 plot.Subtitle = now.ToLongTimeString();
 
                 hour.Points.Clear();
-                hour.Points.Add(new DataPoint(0.0, 30 * (now.Hour % 12)));
-                hour.Points.Add(new DataPoint(0.4, 30 * (now.Hour % 12)));
+                hour.Points.Add(new DataPoint(0.0, 30 * (now.TimeOfDay.TotalHours % 12.0)));
+                hour.Points.Add(new DataPoint(0.4, 30 * (now.TimeOfDay.TotalHours % 12.0)));
 
                 minute.Points.Clear();
-                minute.Points.Add(new DataPoint(0.0, 6 * now.Minute));
-                minute.Points.Add(new DataPoint(0.6, 6 * now.Minute));
+                minute.Points.Add(new DataPoint(0.0, 6 * (now.TimeOfDay.TotalMinutes % 60)));
+                minute.Points.Add(new DataPoint(0.6, 6 * (now.TimeOfDay.TotalMinutes % 60)));
 
                 second.Points.Clear();
                 second.Points.Add(new DataPoint(-0.2, 6 * now.Second));
