@@ -2,9 +2,9 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <AssemblyVersion>0.1.1.1</AssemblyVersion>
-    <FileVersion>0.1.1.1</FileVersion>
-    <PackageVersion>0.1.1.1</PackageVersion>
+    <AssemblyVersion>0.1.1.2</AssemblyVersion>
+    <FileVersion>0.1.1.2</FileVersion>
+    <PackageVersion>0.1.1.2</PackageVersion>
   </PropertyGroup>
   <ItemGroup>
     <Compile Update="**\*.xaml.cs">
@@ -21,12 +21,10 @@
     <None Remove="PlotModelView.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="../../external/oxyplot-avalonia/Source/OxyPlot.Avalonia/OxyPlot.Avalonia.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Avalonia" Version="0.9.6" />
-    <PackageReference Include="Avalonia.Desktop" Version="0.9.6" />
+    <PackageReference Include="Avalonia" Version="0.10.0-preview4" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.10.0-preview4" />
     <PackageReference Include="MathNet.Numerics" Version="4.9.0" />
+    <PackageReference Include="OxyPlot.Avalonia" Version="2.1.0-20200725.1" />
     <PackageReference Include="OxyPlot.Core" Version="2.0.0" />
     <PackageReference Include="ReactiveUI" Version="11.2.3" />
   </ItemGroup>

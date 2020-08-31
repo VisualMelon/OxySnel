@@ -117,5 +117,26 @@ namespace SnelTestCS
             // kill it
             OxySnel.Snel.Kill();
         }
+
+        static void QuickAndEasyExamples()
+        {
+            var rnd = new Random();
+
+            // generate random data
+            var xs = Enumerable.Range(0, 101).Select(i => (double)i).ToList();
+            var ys1 = xs.Select(x => x + x * rnd.NextDouble()).ToList();
+            var ys2 = xs.Select(x => x * 1.4 + x * rnd.NextDouble() * 0.2).ToList();
+
+            // time plot
+            var timePlot = Plot.Linear("Time", "Swans");
+            timePlot.Scatter(xs, ys1);
+            timePlot.Line(xs, ys2);
+            Snel.Show(timePlot, "Swans over time");
+
+            // sample plot
+            var samplePlot = Plot.Linear("Value", "Frequency");
+            samplePlot.Histogram(ys1);
+            Snel.Show(samplePlot, "Swans");
+        }
     }
 }
