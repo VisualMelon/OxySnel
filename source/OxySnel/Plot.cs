@@ -56,6 +56,16 @@ namespace OxySnel
             );
         }
 
+        public LinearColorAxis LinearColorAxis(string title, OxyPalette pallete = null)
+        {
+            pallete = pallete ?? OxyPalettes.Gray(100);
+            var lca = new LinearColorAxis() { Title = title, Position = AxisPosition.Right };
+
+            PlotModel.Axes.Add(lca);
+
+            return lca;
+        }
+
         public ScatterSeries Scatter(IEnumerable<double> x, IEnumerable<double> y, string title = null, MarkerType markerType = (MarkerType)(-1))
         {
             if (markerType < 0)
@@ -88,6 +98,15 @@ namespace OxySnel
             PlotModel.Series.Add(ls);
 
             return ls;
+        }
+
+        public HeatMapSeries Matrix(double[,] data, string title = null, MarkerType markerType = (MarkerType)(-1))
+        {
+            var hms = new HeatMapSeries() { Title = title, Data = data, X0 = 1, X1 = data.GetLength(0), Y0 = 1, Y1 = data.GetLength(1), Interpolate = false };
+
+            PlotModel.Series.Add(hms);
+
+            return hms;
         }
 
         private static IEnumerable<DataPoint> ZipXY(IEnumerable<double> x, IEnumerable<double> y)

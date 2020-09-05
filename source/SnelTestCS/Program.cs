@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 using OxyPlot;
@@ -137,6 +138,31 @@ namespace SnelTestCS
             var samplePlot = Plot.Linear("Value", "Frequency");
             samplePlot.Histogram(ys1);
             Snel.Show(samplePlot, "Swans");
+
+            // matrix plot
+            var matrixPlot = Plot.Linear("Col", "Row");
+            matrixPlot.PlotModel.PlotType = PlotType.Cartesian;
+            foreach (var a in matrixPlot.PlotModel.Axes)
+                if (a is LinearAxis la)
+                    la.MinimumMinorStep = la.MinimumMajorStep = 1;
+            matrixPlot.LinearColorAxis(null, OxyPalettes.Hot64);
+            matrixPlot.Matrix(Array2d(100, 100, (x, y) => Math.Sin(Math.Sqrt(x * x + y * y) / 10)), null);
+            Snel.Show(matrixPlot);
+        }
+
+        private static T[,] Array2d<T>(int d1, int d2, Func<int, int, T> func)
+        {
+            var arr = new T[d1, d2];
+            
+            for (int i = 0; i < d1; i++)
+            {
+                for (int j = 0; j < d2; j++)
+                {
+                    arr[i, j] = func(i, j);
+                }
+            }
+
+            return arr;
         }
     }
 }
