@@ -1,0 +1,46 @@
+name: .NET Core
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+env:
+  # dotnet settings
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+
+  # github packages
+  GITHUB_PACKAGES_FEED: https://nuget.pkg.github.com/OxySnel/
+  GITHUB_PACKAGES_USER: VisualMelon
+  GITHUB_PACKAGES_TOKEN: ${{ secrets.GITHUBPACKAGESTOKEN }}
+
+jobs:
+  build:
+
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, windows-latest ]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '3.1.x'
+    - name: Restore
+      run: dotnet restore source/OxySnel.sln
+    - name: Build
+      run: dotnet build source/OxySnel.sln --configuration Release --no-restore
+    - name: Pack
+      if: matrix.os == 'ubuntu-latest'
+      run: dotnet pack source/OxySnel/OxySnel.csproj --configuration Release -o nupkg # -p:PackageVersion=$GITHUB_RUN_ID this isn't working
+    - name: Push to GitHub Packages
+      if: ${{ matrix.os == 'ubuntu-latest' && github.event_name == 'push' }}
+      run: |
+        for f in ./nupkg/*.nupkg
+        do
+          curl -vX PUT -u "$GITHUB_PACKAGES_USER:$GITHUB_PACKAGES_TOKEN" -F package=@$f $GITHUB_PACKAGES_FEED
+        done
