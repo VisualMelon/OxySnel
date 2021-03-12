@@ -5,9 +5,19 @@
              xmlns:oxy="clr-namespace:OxyPlot.Avalonia;assembly=OxyPlot.Avalonia"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="OxySnel.PlotModelView">
-  <Grid x:Name="Root">
-    <Grid Grid.Row="1" Grid.ColumnSpan="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-      <oxy:PlotView Model="{Binding Context.PlotModel}" />
+  <DockPanel x:Name="Root">
+    <Grid DockPanel.Dock="Top" Background="LightGray" IsVisible="{Binding Context.ShowMenu}">
+      <StackPanel Orientation="Horizontal" Spacing="2" Margin="2">
+        <Button Command="{Binding ZoomIn}">[+]</Button>
+        <Button Command="{Binding ZoomOut}">[-]</Button>
+        <Button Command="{Binding ResetView}">Reset</Button>
+      </StackPanel>
+      <StackPanel Orientation="Horizontal" Spacing="2" Margin="2" HorizontalAlignment="Right">
+        <Button Command="{Binding SavePng}">Save PNG</Button>
+        <Button Command="{Binding SavePdf}">Save PDF</Button>
+        <Button Command="{Binding SaveSvg}">Save SVG</Button>
+      </StackPanel>
     </Grid>
-  </Grid>
+    <oxy:PlotView Model="{Binding Context.PlotModel}" />
+  </DockPanel>
 </UserControl>

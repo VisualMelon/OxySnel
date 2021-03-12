@@ -29,25 +29,42 @@ namespace OxySnel
 
             if (callbackOffthread)
             {
-                var t = new System.Threading.Thread(new System.Threading.ThreadStart(started));
+                var t = new Thread(new ThreadStart(started));
                 started = t.Start;
             }
             Run(AppCancellationToken.Token, started);
         }
 
-        public static Task Show(PlotModel plotModel, string windowTitle = DefaultWindowTitle)
+        public static Task<ViewModel> Show(PlotModel plotModel, string windowTitle = DefaultWindowTitle)
         {
             return Invoke(() =>
             {
                 var w = new MainWindow() { Title = windowTitle };
                 w.Context.PlotModel = plotModel;
                 w.Show();
+                return w.Context;
             });
         }
 
         public static void Kill()
         {
             AppCancellationToken?.Cancel();
+        }
+
+        public static Task<TResult> Invoke<TResult>(Func<TResult> action)
+        {
+            if (AppCancellationToken == null)
+            {
+                lock (DispatcherLock)
+                {
+                    if (AppCancellationToken == null)
+                    {
+                        AppCancellationToken = SpinUp();
+                    }
+                }
+            }
+
+            return Dispatcher.UIThread.InvokeAsync(action);
         }
 
         public static Task Invoke(Action action)

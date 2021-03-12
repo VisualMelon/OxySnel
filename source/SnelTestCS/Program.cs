@@ -13,7 +13,7 @@ namespace SnelTestCS
     {
         static void Main(string[] args)
         {
-            OxySnel.Snel.StartOnThread(ClockExample, true);
+            OxySnel.Snel.StartOnThread(HistogramExample, true);
         }
 
         static void ClockExample()
@@ -148,6 +148,34 @@ namespace SnelTestCS
             matrixPlot.LinearColorAxis(null, OxyPalettes.Hot64);
             matrixPlot.Matrix(Array2d(100, 100, (x, y) => Math.Sin(Math.Sqrt(x * x + y * y) / 10)), null);
             Snel.Show(matrixPlot);
+        }
+
+        static void HistogramExample()
+        {
+            var rnd = new Random();
+
+            var plot = Plot.Linear("Frequency", "Joyness");
+            plot.Histogram(Uniform(rnd, 15, 5, 250, 3));
+
+            Snel.Show(plot, "A box plot");
+        }
+
+        static void BoxPlotExample()
+        {
+            var rnd = new Random();
+
+            var plot = BoxPlotting.PrepareBoxPlot(new[] { "OxySnel", "SloomPlot" }, "Package", "Joyness");
+            BoxPlotting.BoxPlot(plot, new[] { Uniform(rnd, 15, 5, 80, 3), Uniform(rnd, 10, 8, 50, 3) });
+
+            Snel.Show(plot, "A box plot").ContinueWith(t => t.Result.ShowMenu = false);
+        }
+
+        private static double[] Uniform(Random rnd, double mean, double width, int count, int k = 1)
+        {
+            return Enumerable.Range(0, count)
+                .Select(_ => Enumerable.Range(0, k).Select(_ => rnd.NextDouble()).Average())
+                .Select(r => mean + width * (r * 2 - 1))
+                .ToArray();
         }
 
         private static T[,] Array2d<T>(int d1, int d2, Func<int, int, T> func)
