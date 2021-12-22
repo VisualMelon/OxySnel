@@ -1,13 +1,14 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <AssemblyVersion>0.1.1.6</AssemblyVersion>
-    <FileVersion>0.1.1.6</FileVersion>
-    <PackageVersion>0.1.1.6</PackageVersion>
+    <AssemblyVersion>0.1.2</AssemblyVersion>
+    <FileVersion>0.1.2</FileVersion>
+    <PackageVersion>0.1.2</PackageVersion>
     <RepositoryUrl>https://github.com/VisualMelon/OxySnel</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
+  <Import Condition="'$(GITHUB_ACTIONS)' == 'true'" Project="$(MSBuildProjectDirectory)/SourceLink.props"/>
   <ItemGroup>
     <Compile Update="**\*.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
@@ -23,8 +24,8 @@
     <None Remove="PlotModelView.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="0.10.0-preview4" />
-    <PackageReference Include="Avalonia.Desktop" Version="0.10.0-preview4" />
+    <PackageReference Include="Avalonia" Version="0.10.0" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.10.0" />
     <PackageReference Include="OxyPlot.Avalonia" Version="2.1.0-20200725.1" />
     <PackageReference Include="OxyPlot.Core" Version="2.0.0" />
     <PackageReference Include="ReactiveUI" Version="11.2.3" />
@@ -34,5 +35,7 @@
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>
-
+  <Target Name="AdditionalBuildMessages" AfterTargets="build">
+    <Message Importance="high" Text="Detected GITHUB_ACTIONS" Condition="'$(GITHUB_ACTIONS)' != 'true'" />
+  </Target>
 </Project>

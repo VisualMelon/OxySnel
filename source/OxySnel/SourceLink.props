@@ -1,0 +1,23 @@
+﻿<!-- Based on SourceLink.props from Avalonia -->
+<Project>
+  <PropertyGroup>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>false</IncludeSymbols>
+    <DebugType>embedded</DebugType>
+    <!-- Include generated sources in package -->
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <!-- Include symbol files in package -->
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <!-- Deterministic build -->
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All"/>
+  </ItemGroup>
+
+  <!-- Workaround for https://github.com/dotnet/sdk/issues/11105 -->
+  <ItemGroup>
+    <SourceRoot Include="$(NuGetPackageRoot)" Condition="'$(NuGetPackageRoot)' == ''" />
+  </ItemGroup>
+</Project>
