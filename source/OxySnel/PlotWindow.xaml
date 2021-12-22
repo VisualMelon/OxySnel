@@ -5,7 +5,7 @@
         xmlns:os="clr-namespace:OxySnel"
         mc:Ignorable="d"
         Width="550" Height="500"
-        x:Class="OxySnel.MainWindow"
+        x:Class="OxySnel.PlotWindow"
         Title="OxyPlot">
   <os:PlotModelView />
 </Window>

@@ -3,9 +3,9 @@ using ReactiveUI;
 
 namespace OxySnel
 {
-    public class ViewModel : ReactiveObject
+    public class PlotViewModel : ReactiveObject
     {
-        public ViewModel()
+        public PlotViewModel()
         {
         }
 

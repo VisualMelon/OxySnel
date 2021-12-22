@@ -166,7 +166,7 @@ namespace SnelTestCS
             var plot = BoxPlotting.PrepareBoxPlot(new[] { "OxySnel", "SloomPlot" }, "Package", "Joyness");
             BoxPlotting.BoxPlot(plot, new[] { Uniform(rnd, 15, 5, 80, 3), Uniform(rnd, 10, 8, 50, 3) });
 
-            Snel.Show(plot, "A box plot").ContinueWith(t => t.Result.ShowMenu = false);
+            Snel.Show(plot, "A box plot").ContinueWith(t => t.Result.Model.ShowMenu = false);
         }
 
         private static double[] Uniform(Random rnd, double mean, double width, int count, int k = 1)

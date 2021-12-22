@@ -35,14 +35,14 @@ namespace OxySnel
             Run(AppCancellationToken.Token, started);
         }
 
-        public static Task<ViewModel> Show(PlotModel plotModel, string windowTitle = DefaultWindowTitle)
+        public static Task<IPlotWindow> Show(PlotModel plotModel, string windowTitle = DefaultWindowTitle)
         {
             return Invoke(() =>
             {
-                var w = new MainWindow() { Title = windowTitle };
+                var w = new PlotWindow() { Title = windowTitle };
                 w.Context.PlotModel = plotModel;
                 w.Show();
-                return w.Context;
+                return (IPlotWindow)w;
             });
         }
 
@@ -112,7 +112,7 @@ namespace OxySnel
         {
             return AppBuilder.Configure<App>()
                 .UsePlatformDetect()
-                .LogToDebug();
+                .LogToTrace();
         }
     }
 }

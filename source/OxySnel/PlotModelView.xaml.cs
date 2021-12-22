@@ -6,7 +6,7 @@ namespace OxySnel
 {
     public class PlotModelView : UserControl
     {
-        public ViewModel Context { get; } = new ViewModel();
+        public PlotViewModel Context { get; } = new PlotViewModel();
 
         /// <summary>
         /// Attempts to find the parent Window. This will fail on non-desktop I believe.
