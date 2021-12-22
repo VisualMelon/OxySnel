@@ -16,6 +16,10 @@ env:
   GITHUB_PACKAGES_USER: VisualMelon
   GITHUB_PACKAGES_TOKEN: ${{ secrets.GITHUBPACKAGESTOKEN }}
 
+  # myget
+  MYGET_FEED: https://www.myget.org/F/oxysnel
+  MYGET_TOKEN: ${{ secrets.MYGET_TOKEN }}
+
 jobs:
   build:
 
@@ -43,4 +47,11 @@ jobs:
         for f in ./nupkg/*.nupkg
         do
           curl -vX PUT -u "$GITHUB_PACKAGES_USER:$GITHUB_PACKAGES_TOKEN" -F package=@$f $GITHUB_PACKAGES_FEED
+        done
+    - name: Push to MyGet
+      if: ${{ matrix.os == 'ubuntu-latest' && github.event_name == 'push' }}
+      run: |
+        for f in ./nupkg/*.nupkg
+        do
+          dotnet nuget push @$f --api-key $MYGET_TOKEN --source $MYGET_FEED
         done
