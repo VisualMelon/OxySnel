@@ -53,5 +53,5 @@ jobs:
       run: |
         for f in ./nupkg/*.nupkg
         do
-          dotnet nuget push @$f --api-key $MYGET_TOKEN --source $MYGET_FEED
+          dotnet nuget push $f --api-key $MYGET_TOKEN --source $MYGET_FEED
         done
